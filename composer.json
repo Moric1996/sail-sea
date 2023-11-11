@@ -1,72 +1,68 @@
 {
-    "name": "askdkc/breezejp",
-    "description": "Laravel Breeze(とLaravel UIとJetstream)を標準の各種バリデーションや言語設定、タイムスタンプも含めて一瞬で日本語化対応＆言語切替機能も追加 / This package provides Japanese translation for Laravel Breeze, Laravel UI and Jetstream package with language switching feature. It also privides Japanese validation messages",
-    "keywords": [
-        "breeze",
-        "laravel",
-        "laravel ui",
-        "jetstream",
-        "japanese",
-        "translation"
-    ],
-    "homepage": "https://github.com/askdkc/breezejp",
+    "name": "laravel/laravel",
+    "type": "project",
+    "description": "The skeleton application for the Laravel framework.",
+    "keywords": ["laravel", "framework"],
     "license": "MIT",
-    "authors": [
-        {
-            "name": "askdkc",
-            "email": "askdkc@users.noreply.github.com",
-            "role": "Developer"
-        }
-    ],
     "require": {
-        "php": "^8.0",
-        "spatie/laravel-package-tools": "^1.14.0",
-        "illuminate/contracts": "^9.28|^10.0"
+        "php": "^8.1",
+        "guzzlehttp/guzzle": "^7.2",
+        "laravel/framework": "^10.10",
+        "laravel/sanctum": "^3.3",
+        "laravel/tinker": "^2.8"
     },
     "require-dev": {
-        "laravel/pint": "^1.4",
-        "nunomaduro/collision": "^6.0|^7.0",
-        "nunomaduro/larastan": "^2.0",
-        "orchestra/testbench": "^7.7|^8.0",
-        "pestphp/pest": "^1.22|^2.0",
-        "phpstan/extension-installer": "^1.2",
-        "phpunit/phpunit": "^9.5.27|^10.0"
+        "askdkc/breezejp": "^1.7",
+        "fakerphp/faker": "^1.9.1",
+        "laravel/breeze": "^1.26",
+        "laravel/pint": "^1.0",
+        "laravel/sail": "^1.18",
+        "mockery/mockery": "^1.4.4",
+        "nunomaduro/collision": "^7.0",
+        "phpunit/phpunit": "^10.1",
+        "spatie/laravel-ignition": "^2.0"
     },
     "autoload": {
         "psr-4": {
-            "Askdkc\\Breezejp\\": "src",
-            "Askdkc\\Breezejp\\Database\\Factories\\": "database/factories"
+            "App\\": "app/",
+            "Database\\Factories\\": "database/factories/",
+            "Database\\Seeders\\": "database/seeders/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Askdkc\\Breezejp\\Tests\\": "tests"
+            "Tests\\": "tests/"
         }
     },
     "scripts": {
-        "post-autoload-dump": "@php ./vendor/bin/testbench package:discover --ansi",
-        "analyse": "vendor/bin/phpstan analyse",
-        "test": "vendor/bin/pest",
-        "test-coverage": "vendor/bin/pest --coverage",
-        "format": "vendor/bin/pint"
-    },
-    "config": {
-        "sort-packages": true,
-        "allow-plugins": {
-            "pestphp/pest-plugin": true,
-            "phpstan/extension-installer": true
-        }
+        "post-autoload-dump": [
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+            "@php artisan package:discover --ansi"
+        ],
+        "post-update-cmd": [
+            "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
+        ],
+        "post-root-package-install": [
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        ],
+        "post-create-project-cmd": [
+            "@php artisan key:generate --ansi"
+        ]
     },
     "extra": {
         "laravel": {
-            "providers": [
-                "Askdkc\\Breezejp\\BreezejpServiceProvider"
-            ],
-            "aliases": {
-                "Breezejp": "Askdkc\\Breezejp\\Facades\\Breezejp"
-            }
+            "dont-discover": []
         }
     },
-    "minimum-stability": "dev",
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "php-http/discovery": true
+        }
+    },
+    "minimum-stability": "stable",
     "prefer-stable": true
 }
